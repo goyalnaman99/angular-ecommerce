@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "firstname": "Naman",
+    "lastname": "Goyal",
+    "email": "naman.goyal@increff.com",
+    "password": "123"
+  },
+  {
+    "id": "2",
+    "firstname": "Manasa",
+    "lastname": "Pakala",
+    "email": "manasa.pakala@increff.com",
+    "password": "123"
+  },
+  {
+    "id": "3",
+    "firstname": "Kishan",
+    "lastname": "Kumar",
+    "email": "kishan.kumar@increff.com",
+    "password": "123"
+  },
+  {
+    "id": "4",
+    "firstname": "Aaditya",
+    "lastname": "Raj",
+    "email": "aaditya.raj@increff.com",
+    "password": "123"
+  },
+  {
+    "id": "5",
+    "firstname": "Meesala",
+    "lastname": "Shiva",
+    "email": "meesala.shiva@increff.com",
+    "password": "123"
+  }
+]
