@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "brand": "Roadster",
     "category": "T-Shirt",
     "color": "Maroon",
@@ -12,7 +12,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "2",
+    "id": 2,
     "brand": "HRX by Hrithik Roshan",
     "category": "T-Shirt",
     "color": "Yellow",
@@ -24,7 +24,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "3",
+    "id": 3,
     "brand": "Louis Philippe",
     "category": "T-Shirt",
     "color": "Navy Blue",
@@ -36,7 +36,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "4",
+    "id": 4,
     "brand": "Nautica",
     "category": "T-Shirt",
     "color": "Maroon",
@@ -48,7 +48,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "5",
+    "id": 5,
     "brand": "Invictus",
     "category": "Shirt",
     "color": "Red",
@@ -60,7 +60,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "6",
+    "id": 6,
     "brand": "Louis Philippe",
     "category": "Shirt",
     "color": "Blue",
@@ -72,7 +72,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "7",
+    "id": 7,
     "brand": "Nautica",
     "category": "Shirt",
     "color": "Aqua",
@@ -84,7 +84,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "8",
+    "id": 8,
     "brand": "Van Heusen",
     "category": "Shirt",
     "color": "Grey",
@@ -96,7 +96,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "9",
+    "id": 9,
     "brand": "Roadster",
     "category": "Jeans",
     "color": "Navy Blue",
@@ -108,7 +108,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "10",
+    "id": 10,
     "brand": "Highlander",
     "category": "Jeans",
     "color": "Grey",
@@ -120,7 +120,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "11",
+    "id": 11,
     "brand": "Levis",
     "category": "Jeans",
     "color": "Black",
@@ -132,7 +132,7 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit beatae libero maxime tenetur! Quia nostrum aliquid ducimus quam autem commodi sapiente. Iure excepturi eius laboriosam numquam ex laborum enim inventore?"
   },
   {
-    "id": "12",
+    "id": 12,
     "brand": "Calvin Klein Jeans",
     "category": "Jeans",
     "color": "Blue",

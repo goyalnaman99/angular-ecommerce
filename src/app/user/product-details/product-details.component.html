@@ -1,0 +1,34 @@
+<!-- product details -->
+<div class="container-fluid mb-5" id="product-details-container">
+    <div class="row">
+        <div class="col-12 col-lg-6 col-xl-6 col-md-6 mt-4 text-center">
+            <img class="img-fluid" [src]="this.product.imageUrl" alt="Image Not Available" />
+        </div>
+        <div class="col-12 col-lg-6 col-xl-6 col-md-6 mt-4 text-left">
+            <h3 id="product-brand">{{this.product.brand}}</h3>
+            <h4 id="product-name" class="text-secondary">{{this.product.name}}</h4>
+            <hr />
+            <h3 id="product-price">Rs. {{this.product.mrp}}</h3>
+            <h6>inclusive of all taxes</h6>
+            <hr />
+            <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
+            <span class="mx-2" id="qty_input"></span>
+            <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+            <hr />
+            <h5>PRODUCT DETAILS</h5>
+            <p id="product-description"></p>
+            <a href="/HTML/checkout.html" class="btn btn-sm btn-outline-primary">Go to Cart</a>
+        </div>
+    </div>
+</div>
+
+<!-- product not found -->
+<div class="d-none" id="product-not-found">
+    <div class="d-flex justify-content-between align-items-center" style="height: calc(100vh - 111px);">
+        <div class="container text-center">
+            <img src="/resources/images/product-not-found.png" class="img-fluid" height="200px" width="200px">
+            <p class="h5 mt-3">We could not find any matches!</p>
+            <p>Go to our <a href="/HTML/products.html">Products</a> page.</p>
+        </div>
+    </div>
+</div>
