@@ -38,22 +38,6 @@ input {
   border-color: #a90d0dfa;
 }
 
-.iconClass {
-  position: relative;
-}
-.iconClass span {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  display: block;
-}
-
-#filter-section {
-  height: 70%;
-  overflow-y: auto;
-}
-
 .img-height {
   height: 7rem;
 }
-

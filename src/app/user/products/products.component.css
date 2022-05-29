@@ -2,6 +2,11 @@
   cursor: pointer;
 }
 
+#filter-section {
+  height: 70%;
+  overflow-y: auto;
+}
+
 .col-xs-custom,
 .col-sm-custom,
 .col-md-custom,

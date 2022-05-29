@@ -3,13 +3,13 @@
     <div class="row justify-content-md-between d-block d-md-flex m-0 mt-2 pr-2">
         <h2 class="my-auto">Products</h2>
         <div class="row justify-content-between mx-0">
-            <h6 class="text-secondary mt-auto mr-2" id="noOfResults"></h6>
+            <h6 class="text-secondary mt-auto mr-2">Showing {{this.noOfResults}} Results</h6>
             <div class="mt-auto">
                 <button class="btn btn-outline-secondary mr-2 d-lg-none p-0" type="button" data-toggle="collapse"
                     data-target="#filter-section">
-                    <button class="material-icons align-middle" data-toggle="tooltip" title="Filters">
+                    <span class="material-icons align-middle" data-toggle="tooltip" title="Filters">
                         filter_alt
-                    </button>
+                    </span>
                 </button>
                 <select class="custom-select-sm btn btn-sm border-secondary" (change)="sortProducts($event)">
                     <option selected disabled>Sort</option>
@@ -23,7 +23,7 @@
     <hr class="mr-2">
     <div class="row justify-content-center m-0">
         <!-- filter sidebar -->
-        <div class="card col-sm-12 col-lg-2 my-3 d-lg-block" id="filter-section">
+        <div class="card col-sm-12 col-lg-2 my-3 collapse d-lg-block" id="filter-section">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="font-weight-bold mt-1">FILTERS</h5>
@@ -40,7 +40,7 @@
                             arrow_drop_down
                         </span>
                     </div>
-                    <div class="form-check" id="brand-filter" *ngFor="let brand of brands">
+                    <div class="form-check collapse" id="brand-filter" *ngFor="let brand of brands">
                         <input class="form-check-input" (change)="BrandFilter(this.brand, $any($event.target).checked)"
                             type="checkbox" id="{{this.brand}}">
                         <label class="form-check-label" for="{{this.brand}}">
@@ -57,7 +57,7 @@
                             arrow_drop_down
                         </span>
                     </div>
-                    <div class="form-check" id="category-filter" *ngFor="let category of categories">
+                    <div class="form-check collapse" id="category-filter" *ngFor="let category of categories">
                         <input class="form-check-input"
                             (change)="CategoryFilter(this.category, $any($event.target).checked)" type="checkbox"
                             id="{{this.category}}">
@@ -69,7 +69,7 @@
             </div>
         </div>
         <!-- product grid -->
-        <div class="card-group col-lg-10">
+        <div class="card-group col-lg-10" *ngIf="this.noOfResults > 0">
             <div class="col-sm-custom col-md-custom col-lg-custom p-3" *ngFor="let item of filteredProducts">
                 <div class="card h-100">
                     <a routerLink="product-details" [queryParams]="{id: item.id}"><img [src]="this.item.imageUrl"
@@ -90,7 +90,7 @@
             </div>
         </div>
         <!-- zero results -->
-        <div class="d-none col-lg-10 my-auto" id="zero-results">
+        <div *ngIf="this.noOfResults == 0" class="col-lg-10 my-auto" id="zero-results">
             <div class="text-center">
                 <img src="/assets/images/product-not-found.png" class="img-fluid" height="200px" width="200px">
                 <p class="h5 mt-3">No Products to Show</p>

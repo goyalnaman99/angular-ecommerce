@@ -12,6 +12,7 @@ export class ProductsComponent implements OnInit {
   categoryFilterList: Array<any> = [];
   products = this.productService.getProducts();
   filteredProducts = this.products;
+  noOfResults: number;
 
   constructor(public productService: ProductService) { }
 
@@ -40,6 +41,8 @@ export class ProductsComponent implements OnInit {
         );
       }
     } else this.filteredProducts = this.products;
+
+    this.noOfResults = this.filteredProducts.length;
   }
 
   CategoryFilter(category: string, isChecked: boolean) {
@@ -67,6 +70,8 @@ export class ProductsComponent implements OnInit {
         );
       }
     } else this.filteredProducts = this.products;
+
+    this.noOfResults = this.filteredProducts.length;
   }
 
   sortProducts(e) {
@@ -81,6 +86,8 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+
+
   // clearFilters() {
   //   let checkBoxes = document.querySelectorAll('.form-check-input');
   //   checkBoxes.forEach((element) => {
@@ -91,5 +98,6 @@ export class ProductsComponent implements OnInit {
   categories = [...new Set(this.products.map((item) => item.category))];
 
   ngOnInit(): void {
+    this.noOfResults = this.filteredProducts.length;
   }
 }
