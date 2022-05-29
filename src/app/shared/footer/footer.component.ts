@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-  constructor() {}
+  constructor() { }
+  today = new Date().toLocaleString("en-IN");
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setInterval(() => { this.today }, 1000) //TODO fix timer
+  }
 }

@@ -57,35 +57,3 @@ input {
   height: 7rem;
 }
 
-.col-xs-custom,
-.col-sm-custom,
-.col-md-custom,
-.col-lg-custom {
-  position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-.col-xs-custom {
-  width: 20%;
-  float: left;
-}
-@media (min-width: 768px) {
-  .col-sm-custom {
-    width: 33.33%;
-    float: left;
-  }
-}
-@media (min-width: 992px) {
-  .col-md-custom {
-    width: 33.33%;
-    float: left;
-  }
-}
-@media (min-width: 1200px) {
-  .col-lg-custom {
-    width: 20% !important;
-    float: left;
-  }
-}
