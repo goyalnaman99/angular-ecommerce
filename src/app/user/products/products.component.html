@@ -34,15 +34,16 @@
                 <hr>
                 <div id="brand-filter-section">
                     <div class="d-flex justify-content-between cursor" data-toggle="collapse"
-                        data-target="#brand-filter-dummy">
+                        data-target="#brand-filter">
                         <h6>BRAND</h6>
                         <span class="material-icons">
                             arrow_drop_down
                         </span>
                     </div>
-                    <div class="form-check" id="brand-filter-dummy" *ngFor="let brand of brands">
-                        <input class="form-check-input brand" type="checkbox" value="">
-                        <label class="form-check-label" for="brand-filter-dummy">
+                    <div class="form-check" id="brand-filter" *ngFor="let brand of brands">
+                        <input class="form-check-input" (change)="BrandFilter(this.brand, $any($event.target).checked)"
+                            type="checkbox" id="{{this.brand}}">
+                        <label class="form-check-label" for="{{this.brand}}">
                             {{this.brand}}
                         </label>
                     </div>
@@ -50,15 +51,17 @@
                 <hr>
                 <div id="category-filter-section">
                     <div class="d-flex justify-content-between cursor" data-toggle="collapse"
-                        data-target="#category-filter-dummy">
+                        data-target="#category-filter">
                         <h6>CATEGORY</h6>
                         <span class="material-icons">
                             arrow_drop_down
                         </span>
                     </div>
-                    <div class="form-check" id="category-filter-dummy" *ngFor="let category of categories">
-                        <input class="form-check-input category" type="checkbox" value="">
-                        <label class="form-check-label" for="category-filter-dummy">
+                    <div class="form-check" id="category-filter" *ngFor="let category of categories">
+                        <input class="form-check-input"
+                            (change)="CategoryFilter(this.category, $any($event.target).checked)" type="checkbox"
+                            id="{{this.category}}">
+                        <label class="form-check-label" for="{{this.category}}}">
                             {{this.category}}
                         </label>
                     </div>
@@ -67,7 +70,7 @@
         </div>
         <!-- product grid -->
         <div class="card-group col-lg-10">
-            <div class="col-sm-custom col-md-custom col-lg-custom p-3" *ngFor="let item of products">
+            <div class="col-sm-custom col-md-custom col-lg-custom p-3" *ngFor="let item of filteredProducts">
                 <div class="card h-100">
                     <a routerLink="product-details" [queryParams]="{id: item.id}"><img [src]="this.item.imageUrl"
                             class="card-img-top cursor img-fluid" alt="Image Not Available" /></a>
