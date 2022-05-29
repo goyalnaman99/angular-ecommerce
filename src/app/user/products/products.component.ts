@@ -69,6 +69,24 @@ export class ProductsComponent implements OnInit {
     } else this.filteredProducts = this.products;
   }
 
+  sortProducts(e) {
+    var valueSelected = e.target.value;
+    if (valueSelected == 1) {
+      this.filteredProducts.sort((a, b) => (a.id > b.id ? 1 : -1));
+    } else if (valueSelected == 2) {
+      this.filteredProducts.sort((a, b) => (a.mrp > b.mrp ? 1 : -1));
+    }
+    else {
+      this.filteredProducts.sort((a, b) => (a.mrp < b.mrp ? 1 : -1));
+    }
+  }
+
+  // clearFilters() {
+  //   let checkBoxes = document.querySelectorAll('.form-check-input');
+  //   checkBoxes.forEach((element) => {
+  //   });
+  // }
+
   brands = [...new Set(this.products.map((item) => item.brand))];
   categories = [...new Set(this.products.map((item) => item.category))];
 
