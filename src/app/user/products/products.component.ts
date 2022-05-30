@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
+import { map } from 'jquery';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -8,71 +9,37 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  brandFilterList: Array<any> = [];
-  categoryFilterList: Array<any> = [];
+  filters = {
+    brand: [],
+    category: []
+  }
   products = this.productService.getProducts();
   filteredProducts = this.products;
   noOfResults: number;
 
   constructor(public productService: ProductService) { }
 
-  BrandFilter(brand: string, isChecked: boolean) {
+  populateFilters(filterValue: string, filterType: string, isChecked: boolean) {
     if (isChecked) {
-      this.brandFilterList.push(brand);
+      this.filters[filterType].push(filterValue);
     } else {
-      let index = this.brandFilterList.indexOf(brand);
-      this.brandFilterList.splice(index, 1);
+      let index = this.filters[filterType].indexOf(filterValue);
+      this.filters[filterType].splice(index, 1);
     }
+    this.filterProducts(this.filters);
+  }
 
-    if (this.brandFilterList.length || this.categoryFilterList.length) {
-      if (!this.categoryFilterList.length) {
-        this.filteredProducts = this.products.filter((product) =>
-          this.brandFilterList.includes(product.brand)
-        );
-      } else if (!this.brandFilterList.length) {
-        this.filteredProducts = this.products.filter((product) =>
-          this.categoryFilterList.includes(product.category)
-        );
-      } else {
-        this.filteredProducts = this.products.filter(
-          (product) =>
-            this.categoryFilterList.includes(product.category) &&
-            this.brandFilterList.includes(product.brand)
-        );
-      }
-    } else this.filteredProducts = this.products;
-
+  filterProducts(filters) {
+    const filterKeys = Object.keys(filters);
+    this.filteredProducts = this.products.filter(product => {
+      return filterKeys.every(key => {
+        if (!filters[key].length) return true;
+        return filters[key].includes(product[key]);
+      })
+    })
     this.noOfResults = this.filteredProducts.length;
   }
 
-  CategoryFilter(category: string, isChecked: boolean) {
-    if (isChecked) {
-      this.categoryFilterList.push(category);
-    } else {
-      let index = this.categoryFilterList.indexOf(category);
-      this.categoryFilterList.splice(index, 1);
-    }
-
-    if (this.brandFilterList.length || this.categoryFilterList.length) {
-      if (!this.categoryFilterList.length) {
-        this.filteredProducts = this.products.filter((product) =>
-          this.brandFilterList.includes(product.brand)
-        );
-      } else if (!this.brandFilterList.length) {
-        this.filteredProducts = this.products.filter((product) =>
-          this.categoryFilterList.includes(product.category)
-        );
-      } else {
-        this.filteredProducts = this.products.filter(
-          (product) =>
-            this.categoryFilterList.includes(product.category) &&
-            this.brandFilterList.includes(product.brand)
-        );
-      }
-    } else this.filteredProducts = this.products;
-
-    this.noOfResults = this.filteredProducts.length;
-  }
 
   sortProducts(e) {
     var valueSelected = e.target.value;
@@ -88,11 +55,10 @@ export class ProductsComponent implements OnInit {
 
 
 
-  // clearFilters() {
-  //   let checkBoxes = document.querySelectorAll('.form-check-input');
-  //   checkBoxes.forEach((element) => {
-  //   });
-  // }
+  clearFilters() {
+    console.log("clear filters");
+    let checkBoxes = document.querySelectorAll('.form-check-input');
+  }
 
   brands = [...new Set(this.products.map((item) => item.brand))];
   categories = [...new Set(this.products.map((item) => item.category))];
