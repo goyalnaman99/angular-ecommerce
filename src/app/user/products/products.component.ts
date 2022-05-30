@@ -56,8 +56,7 @@ export class ProductsComponent implements OnInit {
 
 
   clearFilters() {
-    console.log("clear filters");
-    let checkBoxes = document.querySelectorAll('.form-check-input');
+    $("input[type=checkbox]").prop("checked", true).trigger("click");
   }
 
   brands = [...new Set(this.products.map((item) => item.brand))];
