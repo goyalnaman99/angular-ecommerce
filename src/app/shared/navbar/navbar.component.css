@@ -7,3 +7,7 @@
   right: 0px;
   display: block;
 }
+
+.cursor {
+  cursor: pointer;
+}

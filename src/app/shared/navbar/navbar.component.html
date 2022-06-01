@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link iconClass" href="/HTML/checkout.html">
+            <a class="nav-link iconClass" routerLink="cart">
                 <i class="material-icons text-white" data-toggle="tooltip" title="Cart">shopping_cart</i>
                 <span class="badge badge-info" id="itemBadge"></span>
             </a>
@@ -19,8 +19,8 @@
         <div class="row mx-2 my-2">
             <span class="text-white" id="navUser"></span>
         </div>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item cursor">
+            <a class="nav-link" (click)="logout()">
                 <i class="material-icons text-white" id="logout" data-toggle="tooltip" title="Logout">
                     logout
                 </i>
