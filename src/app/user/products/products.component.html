@@ -83,9 +83,11 @@
                         <h6>{{this.item.name}}</h6>
                         <h6>Rs : {{this.item.mrp}}</h6>
                         <div>
-                            <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
-                            <span class="mx-2" id="qty_input"></span>
-                            <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+                            <button class="btn btn-dark btn-sm" (click)="cartService.decreaseQuantity(item.id)"><i
+                                    class="fa fa-minus"></i></button>
+                            <span class="mx-2"></span>
+                            <button class="btn btn-dark btn-sm" (click)="cartService.increaseQuantity(item.id)"><i
+                                    class="fa fa-plus"></i></button>
                         </div>
                     </div>
                 </div>

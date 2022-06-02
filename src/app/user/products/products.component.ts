@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
 import { map } from 'jquery';
 import { ProductService } from 'src/app/services/product.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -17,7 +18,7 @@ export class ProductsComponent implements OnInit {
   filteredProducts = this.products;
   noOfResults: number;
 
-  constructor(public productService: ProductService) { }
+  constructor(private productService: ProductService, public cartService: CartService) { }
 
   populateFilters(filterValue: string, filterType: string, isChecked: boolean) {
     if (isChecked) {
@@ -53,8 +54,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-
-
   clearFilters() {
     $("input[type=checkbox]").prop("checked", true).trigger("click");
   }
@@ -64,5 +63,9 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.noOfResults = this.filteredProducts.length;
+    for (let product of this.products) {
+      product['quantity'] = this.cartService.getProductQuantity(product.id);
+    }
+    console.log(this.products);
   }
 }
