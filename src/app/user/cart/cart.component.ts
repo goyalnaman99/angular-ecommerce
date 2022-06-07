@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   cartItems = this.cartService.getCartItems();
   products = this.productService.getProducts();
   displayStyle = "none";
+  displaySuccessModal = "none";
   modalTitle = "";
   modalBody = "";
   currProductId: number;
@@ -92,6 +93,12 @@ export class CartComponent implements OnInit {
 
     //clearing cart
     this.cartService.clearCart();
+
+    this.openSuccessModal();
+  }
+
+  openSuccessModal() {
+    this.displaySuccessModal = "block";
   }
 
   deleteProduct(productId: number) {
@@ -106,6 +113,7 @@ export class CartComponent implements OnInit {
     this.currProductId = productId;
     this.modalBody = modalBody;
   }
+
   closePopup() {
     this.displayStyle = "none";
   }

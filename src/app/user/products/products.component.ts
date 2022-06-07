@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'jquery';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
+declare var $: any;
 
 @Component({
   selector: 'app-products',
@@ -95,6 +95,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.noOfResults = this.filteredProducts.length;
-    console.log(this.products);
+    $(document).ready(() => {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   }
 }

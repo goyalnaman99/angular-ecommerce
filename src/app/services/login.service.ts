@@ -45,5 +45,18 @@ export class LoginService {
     }
   }
 
+  getUserName() {
+    let user = this.getUserId();
+    if (user) {
+      for (let element of users) {
+        if (element.id == user) {
+          return element.firstname;
+        }
+      }
+      return "Invalid User";
+    }
+    return "Invalid User";
+  }
+
   constructor(private router: Router) { }
 }
