@@ -1,11 +1,10 @@
 <!-- checkout -->
 <div class="container mb-5">
-    <div id="cartHeader">
+    <div *ngIf="(cartItems | keyvalue)?.length">
         <div class="row ml-2 mr-2 mt-3 justify-content-between">
             <h4 class="font-weight-bold">Cart</h4>
-            <button class="btn btn-outline-danger btn-sm py-0">
-                <i class="material-icons cursor" id="clearCart" data-toggle="tooltip" data-placement="left"
-                    title="Clear Cart">
+            <button class="btn btn-outline-danger btn-sm py-0" (click)="clearCartModal()">
+                <i class="material-icons cursor" data-toggle="tooltip" data-placement="left" title="Clear Cart">
                     remove_shopping_cart
                 </i>
             </button>
@@ -13,31 +12,36 @@
         <hr>
     </div>
     <div class="row">
-        <div class="col-12 col-md-8" id="cartContainer">
-            <div class="border rounded shadow-sm m-2 d-none" id="firstCartItem">
+        <div class="col-12 col-md-8" *ngIf="(cartItems | keyvalue)?.length">
+            <div class="border rounded shadow-sm m-2" *ngFor="let item of cartItems | keyvalue">
                 <div class="row m-0 p-2">
-                    <img class="img-fluid img-thumbnail border-0" src="" alt="Image Not Available" />
+                    <a routerLink="/product-details" [queryParams]="{id: item.key}"><img
+                            class="img-fluid img-thumbnail border-0"
+                            [src]="this.productService.getProduct(item.key)?.imageUrl" alt="Image Not Available" /></a>
                     <div class="col">
                         <div class="d-flex justify-content-between">
-                            <h5 id="product-brand" class="font-weight-bold"></h5>
-                            <i class="material-icons cursor text-danger" id="delete" data-toggle="tooltip"
-                                title="Remove Product from Cart">
-                                delete
-                            </i>
+                            <h5 class="font-weight-bold">{{this.productService.getProduct(item.key)?.brand}}</h5>
+                            <button class="btn btn-sm btn-outline-danger"
+                                (click)="openPopup('Remove From Cart', 'Are you sure you want to remove ' + this.productService.getProduct(item.key)?.name + ' from cart?', item.key)"><i
+                                    class="material-icons cursor text-danger" id="delete" data-toggle="tooltip"
+                                    title="Remove Product from Cart">
+                                    delete
+                                </i></button>
                         </div>
-                        <h6 id="product-name"></h6>
-                        <h6 id="product-size" class="text-secondary"></h6>
-                        <h6 id="product-price"></h6>
+                        <h6>{{this.productService.getProduct(item.key)?.name}}</h6>
+                        <h6>{{this.productService.getProduct(item.key)?.mrp}}</h6>
                         <div>
-                            <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
-                            <span class="mx-2" id="qty_input"></span>
-                            <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+                            <button class="btn btn-dark btn-sm" (click)="decreaseQuantity(item.key)"><i
+                                    class="fa fa-minus"></i></button>
+                            <span class="mx-2" id="qty_input">{{this.cartService.getProductQuantity(item.key)}}</span>
+                            <button class="btn btn-dark btn-sm" (click)="increaseQuantity(item.key)"><i
+                                    class="fa fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-4" id="cartPrice">
+        <div class="col-12 col-md-4" *ngIf="(cartItems | keyvalue)?.length">
             <h4 class="font-weight-bold m-2">Price Details</h4>
             <hr>
             <div class="border rounded shadow-sm m-2">
@@ -45,17 +49,18 @@
                     <div class="col">
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-bold">Total Items</h6>
-                            <span class="font-weight-bold" id="totalItems"></span>
+                            <span class="font-weight-bold">{{this.cartService.getTotalQuantity()}}</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Total MRP</span>
-                            <span id="totalMRP" class="justify-content-end"></span>
+                            <span class="justify-content-end">{{this.cartService.getTotalPrice().toLocaleString("en-IN",
+                                {style:"currency", currency:"INR"})}}</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mr-2 justify-content-end">
-                <button class="btn btn-sm btn-outline-primary btn-block ml-4" id="placeOrder">Place
+                <button class="btn btn-sm btn-outline-primary btn-block ml-4" (click)="downloadOrderCSV()">Place
                     Order</button>
             </div>
         </div>
@@ -63,12 +68,34 @@
 </div>
 
 <!-- empty cart -->
-<div class="d-none" id="emptyCart">
+<div *ngIf="!(cartItems | keyvalue)?.length" id="emptyCart">
     <div class="d-flex justify-content-between align-items-center" style="height: calc(100vh - 200px);">
         <div class="container text-center">
-            <img src="/resources/images/empty-cart.png" class="img-fluid" height="200px" width="200px">
+            <img src="/assets/images/empty-cart.png" class="img-fluid" height="200px" width="200px">
             <p class="h5 mt-3">Your Cart is Empty</p>
-            <p>Go to our <a href="/HTML/products.html">Products</a> page.</p>
+            <p>Go to our <a routerLink="/">Products</a> page.</p>
+        </div>
+    </div>
+</div>
+
+<!-- confirm modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{modalTitle}}</h5>
+            </div>
+            <div class="modal-body">
+                <p>{{modalBody}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-outline-danger" *ngIf="currProductId != 0"
+                    (click)="deleteProduct(currProductId)">Yes</button>
+                <button type="button" class="btn btn-sm btn-outline-danger" *ngIf="currProductId == 0"
+                    (click)="clearCart()">Yes</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal"
+                    (click)="closePopup()">No</button>
+            </div>
         </div>
     </div>
 </div>

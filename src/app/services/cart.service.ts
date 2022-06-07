@@ -26,8 +26,27 @@ export class CartService {
       const cartMap = this.getCartMap();
       const userId = this.loginService.getUserId();
       if (userId) {
-        console.log("if");
-        return cartMap.hasOwnProperty(userId) ? cartMap[userId] : {};
+        let cartItems = cartMap.hasOwnProperty(userId) ? cartMap[userId] : {};
+        for (let key in cartItems) {
+          if (!this.productService.getProduct(key)) {
+            console.log("error in product id");
+            delete cartItems[key];
+            this.setCartMap(cartItems);
+          }
+          if (!isNaN(cartItems[key])) {
+            if (cartItems[key] < 0) {
+              console.log("quantity not positive");
+              delete cartItems[key];
+              this.setCartMap(cartItems);
+            }
+          }
+          else {
+            console.log("quantity not number");
+            delete cartItems[key];
+            this.setCartMap(cartItems);
+          }
+        }
+        return cartItems;
       }
     } catch (err) {
       return {};
@@ -36,13 +55,31 @@ export class CartService {
 
   getProductQuantity(productId) {
     const cartItems = this.getCartItems();
-    console.log(cartItems);
     return cartItems[productId] || 0;
   }
 
+  getTotalQuantity(): number {
+    let cartItems = this.getCartItems();
+    let quantity = 0;
+    for (let key in cartItems) {
+      quantity += cartItems[key];
+    }
+    return quantity;
+  }
+
+  getTotalPrice(): number {
+    let cartItems = this.getCartItems();
+    let totalPrice = 0;
+    for (let key in cartItems) {
+      let mrp = this.productService.getProduct(key)?.mrp || 0;
+      let quantity: number = this.getProductQuantity(key);
+      totalPrice += (mrp * quantity);
+    }
+    return totalPrice;
+  }
+
   setCartMap(cartItems) {
-    const cartMap = this.getCartMap();
-    console.log(cartMap);
+    let cartMap = this.getCartMap();
     const userId = this.loginService.getUserId();
 
     if (userId) {
@@ -52,14 +89,20 @@ export class CartService {
   }
 
   deletefromCart(productId) {
-    const cartItems = this.getCartItems();
+    console.log("in delete");
+    let cartItems = this.getCartItems();
     if (cartItems != null) {
-      const index = cartItems.findIndex((cartItem) => cartItem.id === productId);
-      if (index >= 0) {
-        cartItems.splice(index, 1);
-      }
+      console.log(cartItems[productId]);
+      let stringId = productId.toString();
+      delete cartItems[productId];
+      console.log(cartItems[productId]);
+      console.log(cartItems);
       this.setCartMap(cartItems);
     }
+  }
+
+  clearCart() {
+    this.setCartMap({});
   }
 
   increaseQuantity(productId) {
@@ -73,13 +116,13 @@ export class CartService {
   decreaseQuantity(productId) {
     let quantity = this.getProductQuantity(productId);
 
-    if (quantity > 0) {
+    if (quantity > 1) {
       quantity--;
+      this.addToCart(productId, quantity);
     }
-    else if (quantity <= 0) {
-      quantity = 0;
+    else if (quantity <= 1) {
+      this.deletefromCart(productId);
     }
-    this.addToCart(productId, quantity);
   }
 
   addToCart(productId, qty) {

@@ -11,7 +11,7 @@ export class ProductService {
     return products;
   }
 
-  getProduct(productId: number) {
+  getProduct(productId: any) {
     for (let item of products) {
       if (item.id == productId) {
         return item;

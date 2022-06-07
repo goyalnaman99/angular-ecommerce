@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormControl, FormBuilder } from '@angular/forms';
 import { map } from 'jquery';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -17,6 +16,13 @@ export class ProductsComponent implements OnInit {
   products = this.productService.getProducts();
   filteredProducts = this.products;
   noOfResults: number;
+  cartItems = this.cartService.getCartItems();
+  brands = [...new Set(this.products.map((item) => item.brand))];
+  categories = [...new Set(this.products.map((item) => item.category))];
+  displayStyle = "none";
+  modalTitle = "";
+  modalBody = "";
+  currProductId: number;
 
   constructor(private productService: ProductService, public cartService: CartService) { }
 
@@ -58,14 +64,37 @@ export class ProductsComponent implements OnInit {
     $("input[type=checkbox]").prop("checked", true).trigger("click");
   }
 
-  brands = [...new Set(this.products.map((item) => item.brand))];
-  categories = [...new Set(this.products.map((item) => item.category))];
+  increaseQuantity(productId: any) {
+    this.cartService.increaseQuantity(productId);
+  }
+
+
+  decreaseQuantity(productId: any) {
+    if (this.cartService.getProductQuantity(productId) <= 1) {
+      let prod = this.productService.getProduct(productId);
+      this.openPopup("Remove From Cart", "Are you sure you want to delete " + prod?.name + " from cart?", productId);
+    }
+    else this.cartService.decreaseQuantity(productId);
+  }
+
+  deleteProduct(productId: number) {
+    this.cartService.deletefromCart(productId);
+    this.closePopup();
+    location.reload();
+  }
+
+  openPopup(modalTitle: string, modalBody: string, productId?: any) {
+    this.displayStyle = "block";
+    this.modalTitle = modalTitle;
+    this.currProductId = productId;
+    this.modalBody = modalBody;
+  }
+  closePopup() {
+    this.displayStyle = "none";
+  }
 
   ngOnInit(): void {
     this.noOfResults = this.filteredProducts.length;
-    for (let product of this.products) {
-      product['quantity'] = this.cartService.getProductQuantity(product.id);
-    }
     console.log(this.products);
   }
 }

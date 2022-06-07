@@ -11,13 +11,19 @@
             <h3 id="product-price">Rs. {{this.product.mrp}}</h3>
             <h6>inclusive of all taxes</h6>
             <hr />
-            <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
-            <span class="mx-2" id="qty_input"></span>
-            <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+            <button class="btn btn-dark btn-sm" *ngIf="this.cartService.getProductQuantity(this.product.id) == 0"
+                (click)="increaseQuantity(this.product.id)">Add to Cart</button>
+            <div *ngIf="this.cartService.getProductQuantity(this.product.id) > 0">
+                <button class="btn btn-dark btn-sm" (click)="decreaseQuantity(this.product.id)"><i
+                        class="fa fa-minus"></i></button>
+                <span class="mx-2">{{this.cartService.getProductQuantity(this.product.id)}}</span>
+                <button class="btn btn-dark btn-sm" (click)="increaseQuantity(this.product.id)"><i
+                        class="fa fa-plus"></i></button>
+            </div>
             <hr />
             <h5>PRODUCT DETAILS</h5>
-            <p id="product-description"></p>
-            <a href="/HTML/checkout.html" class="btn btn-sm btn-outline-primary">Go to Cart</a>
+            <p>{{this.product.description}}</p>
+            <a routerLink="/cart" class="btn btn-sm btn-dark">Go to Cart</a>
         </div>
     </div>
 </div>
@@ -29,6 +35,26 @@
             <img src="/assets/images/product-not-found.png" class="img-fluid" height="200px" width="200px">
             <p class="h5 mt-3">We could not find any matches!</p>
             <p>Go to our <a routerLink="">Products</a> page.</p>
+        </div>
+    </div>
+</div>
+
+<!-- confirm modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{modalTitle}}</h5>
+            </div>
+            <div class="modal-body">
+                <p>{{modalBody}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-outline-danger"
+                    (click)="deleteProduct(currProductId)">Yes</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal"
+                    (click)="closePopup()">No</button>
+            </div>
         </div>
     </div>
 </div>

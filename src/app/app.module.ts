@@ -10,6 +10,7 @@ import { ProductDetailsComponent } from './user/product-details/product-details.
 import { ProductsComponent } from './user/products/products.component';
 import { CartComponent } from './user/cart/cart.component';
 import { LoginComponent } from './user/login/login.component';
+import { UploadComponent } from './user/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,14 @@ import { LoginComponent } from './user/login/login.component';
     ProductDetailsComponent,
     ProductsComponent,
     CartComponent,
-    LoginComponent
+    LoginComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

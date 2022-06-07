@@ -4,6 +4,9 @@ import { ProductDetailsComponent } from './user/product-details/product-details.
 import { ProductsComponent } from './user/products/products.component';
 import { CartComponent } from './user/cart/cart.component';
 import { LoginComponent } from './user/login/login.component';
+import { UploadComponent } from './user/upload/upload.component';
+import { AuthGuard } from './services/auth.guard';
+
 const routes: Routes = [
   {
     path: 'login',
@@ -12,14 +15,22 @@ const routes: Routes = [
   {
     path: 'product-details',
     component: ProductDetailsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',
     component: ProductsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'cart',
     component: CartComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'upload',
+    component: UploadComponent,
+    canActivate: [AuthGuard]
   },
 ];
 

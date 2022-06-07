@@ -1,0 +1,13 @@
+.img-thumbnail {
+  height: 10rem;
+}
+
+.img-height {
+  height: 7rem;
+}
+
+.custom-sticky-top {
+  position: sticky;
+  top: 82px;
+  z-index: 1020;
+}

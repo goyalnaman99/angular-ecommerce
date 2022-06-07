@@ -25,10 +25,6 @@ input {
   text-align: center !important;
 }
 
-.img-thumbnail {
-  height: 10rem;
-}
-
 .text-danger {
   color: #a90d0dfa !important;
 }
@@ -36,8 +32,4 @@ input {
 .btn-outline-danger {
   color: #a90d0dfa;
   border-color: #a90d0dfa;
-}
-
-.img-height {
-  height: 7rem;
 }
