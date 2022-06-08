@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import 'jquery';
 declare var $: any;
 
 @Component({

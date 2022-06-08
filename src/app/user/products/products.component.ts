@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavFootService } from 'src/app/services/nav-foot.service';
+import 'jquery';
 declare var $: any;
 
 @Component({
@@ -34,6 +35,7 @@ export class ProductsComponent implements OnInit {
       let index = this.filters[filterType].indexOf(filterValue);
       this.filters[filterType].splice(index, 1);
     }
+    // sessionStorage.setItem('filters', JSON.stringify(this.filters));
     this.filterProducts(this.filters);
   }
 
@@ -95,6 +97,20 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.filters = JSON.parse(sessionStorage.getItem('filters')!)
+    // if (!this.filters) {
+    //   this.filters = {
+    //     brand: [],
+    //     category: []
+    //   }
+    // }
+    // else {
+    //   for (let key in this.filters) {
+    //     console.log($("#" + this.filters[key]).html());
+    //     $("#" + this.filters[key]).prop('checked', true);
+    //   }
+    // }
+    // console.log(this.filters);
     this.noOfResults = this.filteredProducts.length;
     this.nav.show();
     $(document).ready(() => {
