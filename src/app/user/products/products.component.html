@@ -41,7 +41,7 @@
                             arrow_drop_down
                         </span>
                     </div>
-                    <div class="form-check collapse" id="brand-filter" *ngFor="let brand of brands">
+                    <div class="form-check show" id="brand-filter" *ngFor="let brand of brands">
                         <input class="form-check-input"
                             (change)="populateFilters(brand, 'brand', $any($event.target).checked)" type="checkbox"
                             id="{{brand}}">
@@ -59,7 +59,7 @@
                             arrow_drop_down
                         </span>
                     </div>
-                    <div class="form-check collapse" id="category-filter" *ngFor="let category of categories">
+                    <div class="form-check show" id="category-filter" *ngFor="let category of categories">
                         <input class="form-check-input"
                             (change)="populateFilters(category, 'category' , $any($event.target).checked)"
                             type="checkbox" id="{{category}}">

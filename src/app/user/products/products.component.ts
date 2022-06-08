@@ -26,7 +26,8 @@ export class ProductsComponent implements OnInit {
   modalBody = "";
   currProductId: number;
 
-  constructor(private productService: ProductService, public cartService: CartService, public nav: NavFootService) { }
+  constructor(private productService: ProductService, public cartService: CartService, public nav: NavFootService) {
+  }
 
   populateFilters(filterValue: string, filterType: string, isChecked: boolean) {
     if (isChecked) {
@@ -105,16 +106,20 @@ export class ProductsComponent implements OnInit {
     //   }
     // }
     // else {
-    //   for (let key in this.filters) {
-    //     console.log($("#" + this.filters[key]).html());
-    //     $("#" + this.filters[key]).prop('checked', true);
+    //   console.log(this.filters);
+    //   for (let key of this.filters['brand']) {
+    //     console.log($('#Roadster'));
+    //     $("#" + key).prop('checked', true);
+    //   }
+    //   for (let key of this.filters['category']) {
+    //     $("#" + key).prop('checked', true);
     //   }
     // }
     // console.log(this.filters);
-    this.noOfResults = this.filteredProducts.length;
-    this.nav.show();
     $(document).ready(() => {
       $('[data-toggle="tooltip"]').tooltip()
     })
+    this.noOfResults = this.filteredProducts.length;
+    this.nav.show();
   }
 }
