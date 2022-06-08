@@ -21,12 +21,11 @@
                     <div class="col">
                         <div class="d-flex justify-content-between">
                             <h5 class="font-weight-bold">{{this.productService.getProduct(item.key)?.brand}}</h5>
-                            <button class="btn btn-sm btn-outline-danger"
-                                (click)="openPopup('Remove From Cart', 'Are you sure you want to remove ' + this.productService.getProduct(item.key)?.name + ' from cart?', item.key)"><i
-                                    class="material-icons cursor text-danger" id="delete" data-toggle="tooltip"
-                                    title="Remove Product from Cart">
-                                    delete
-                                </i></button>
+                            <i (click)="openPopup('Remove From Cart', 'Are you sure you want to remove ' + this.productService.getProduct(item.key)?.name + ' from cart?', item.key)"
+                                class="material-icons cursor text-danger" id="delete" data-toggle="tooltip"
+                                title="Remove Product from Cart">
+                                delete
+                            </i>
                         </div>
                         <h6>{{this.productService.getProduct(item.key)?.name}}</h6>
                         <h6>{{this.productService.getProduct(item.key)?.mrp}}</h6>
@@ -42,7 +41,7 @@
             </div>
         </div>
         <div class="col-12 col-md-4" *ngIf="(cartItems | keyvalue)?.length">
-            <h4 class="font-weight-bold m-2">Price Details</h4>
+            <h5 class="font-weight-bold m-2">Price Details</h5>
             <hr>
             <div class="border rounded shadow-sm m-2">
                 <div class="row m-0 p-2">

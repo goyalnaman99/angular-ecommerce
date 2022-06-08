@@ -8,8 +8,9 @@
             <h3 id="product-brand">{{this.product.brand}}</h3>
             <h4 id="product-name" class="text-secondary">{{this.product.name}}</h4>
             <hr />
-            <h3 id="product-price">Rs. {{this.product.mrp}}</h3>
-            <h6>inclusive of all taxes</h6>
+            <h4 id="product-price">{{this.product.mrp.toLocaleString("en-IN",
+                {style:"currency", currency:"INR"})}}</h4>
+            <h6 class="text-secondary">inclusive of all taxes</h6>
             <hr />
             <button class="btn btn-dark btn-sm" *ngIf="this.cartService.getProductQuantity(this.product.id) == 0"
                 (click)="increaseQuantity(this.product.id)">Add to Cart</button>

@@ -14,3 +14,7 @@
 .img-height {
   height: 7rem;
 }
+
+.cursor {
+  cursor: pointer;
+}

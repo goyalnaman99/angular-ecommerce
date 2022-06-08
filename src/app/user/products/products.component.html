@@ -73,7 +73,7 @@
         <!-- product grid -->
         <div class="card-group col-lg-10" *ngIf="this.noOfResults > 0">
             <div class="col-sm-custom col-md-custom col-lg-custom p-3" *ngFor="let item of filteredProducts">
-                <div class="card h-100">
+                <div class="card h-100 shadow-sm">
                     <a routerLink="product-details" [queryParams]="{id: item.id}"><img [src]="this.item.imageUrl"
                             class="card-img-top cursor img-fluid" alt="Image Not Available" /></a>
                     <div class="card-body text-center d-flex flex-column justify-content-between">
@@ -81,7 +81,8 @@
                             <h5>{{this.item.brand}}</h5>
                         </a>
                         <h6>{{this.item.name}}</h6>
-                        <h6>Rs : {{this.item.mrp}}</h6>
+                        <h6>{{this.item.mrp.toLocaleString("en-IN",
+                            {style:"currency", currency:"INR"})}}</h6>
                         <button class="btn btn-dark btn-sm" *ngIf="this.cartService.getProductQuantity(item.id) == 0"
                             (click)="increaseQuantity(item.id)">Add to Cart</button>
                         <div *ngIf="this.cartService.getProductQuantity(item.id) > 0">

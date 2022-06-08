@@ -105,6 +105,9 @@ export class UploadComponent implements OnInit {
   }
 
   downloadErrors(data) {
+    console.log(data);
+    data = data.filter((row) => row.hasOwnProperty('errors'));
+    console.log(data);
     //unparsing to csv
     const csv = this.papa.unparse(data, { columns: ["id", "quantity", "errors"] });
 
