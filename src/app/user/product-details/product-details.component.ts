@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
+import { NavFootService } from 'src/app/services/nav-foot.service';
 
 @Component({
   selector: 'app-product-details',
@@ -19,7 +20,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public productService: ProductService,
-    public cartService: CartService
+    public cartService: CartService,
+    public nav: NavFootService
   ) { }
 
   increaseQuantity(productId: any) {
@@ -55,7 +57,8 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe((params) => {
         this.productId = params['id'];
       });
-    console.log(this.productId);
+
+    this.nav.show();
 
     this.product = this.productService.getProduct(this.productId);
   }

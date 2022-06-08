@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
+import { NavFootService } from 'src/app/services/nav-foot.service';
 declare var $: any;
 
 @Component({
@@ -24,7 +25,7 @@ export class ProductsComponent implements OnInit {
   modalBody = "";
   currProductId: number;
 
-  constructor(private productService: ProductService, public cartService: CartService) { }
+  constructor(private productService: ProductService, public cartService: CartService, public nav: NavFootService) { }
 
   populateFilters(filterValue: string, filterType: string, isChecked: boolean) {
     if (isChecked) {
@@ -95,6 +96,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.noOfResults = this.filteredProducts.length;
+    this.nav.show();
     $(document).ready(() => {
       $('[data-toggle="tooltip"]').tooltip()
     })

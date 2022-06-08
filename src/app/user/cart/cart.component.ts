@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Papa } from 'ngx-papaparse';
+import { NavFootService } from 'src/app/services/nav-foot.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,7 @@ export class CartComponent implements OnInit {
   modalBody = "";
   currProductId: number;
 
-  constructor(public productService: ProductService, public cartService: CartService, private papa: Papa) { }
+  constructor(public productService: ProductService, public cartService: CartService, private papa: Papa, public nav: NavFootService) { }
 
   increaseQuantity(productId: any) {
     this.cartService.increaseQuantity(productId);
@@ -119,6 +120,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nav.show();
   }
 
 }

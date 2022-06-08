@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Papa } from 'ngx-papaparse';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
+import { NavFootService } from 'src/app/services/nav-foot.service';
 
 @Component({
   selector: 'app-upload',
@@ -16,7 +17,7 @@ export class UploadComponent implements OnInit {
   tableData: any = [];
   file = null;
 
-  constructor(public papa: Papa, public cartService: CartService, public productService: ProductService) { }
+  constructor(public papa: Papa, public cartService: CartService, public productService: ProductService, public nav: NavFootService) { }
 
   uploadFiles(file: any) {
     this.file = file.files[0];
@@ -84,10 +85,22 @@ export class UploadComponent implements OnInit {
 
   populateTableData(data) {
     let i = 0;
+    let alreadyPresent = false;
     data.map((data, index) => {
-      this.tableData.push(this.productService.getProduct(data.id));
-      this.tableData[i].quantity = data.quantity;
-      i++;
+      for (let element of this.tableData) {
+        if (element.id == data.id) {
+          element.quantity += Number(data.quantity);
+          alreadyPresent = true;
+        }
+      }
+      if (!alreadyPresent) {
+        this.tableData.push(this.productService.getProduct(data.id));
+        this.tableData[i].quantity = Number(data.quantity);
+        i++;
+      }
+      else {
+        alreadyPresent = false;
+      }
     })
   }
 
@@ -124,6 +137,7 @@ export class UploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nav.show();
   }
 
 }

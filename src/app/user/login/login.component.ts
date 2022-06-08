@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { NavFootService } from 'src/app/services/nav-foot.service';
 
 @Component({
   selector: 'app-login',
@@ -13,17 +14,18 @@ export class LoginComponent implements OnInit {
   password: string = "";
   wrongCredentials: boolean = false;
 
+  constructor(private router: Router, private loginService: LoginService, public nav: NavFootService) { }
+
   login() {
     this.wrongCredentials = !this.loginService.login(this.email, this.password);
     console.log(this.wrongCredentials);
   }
 
-  constructor(private router: Router, private loginService: LoginService,) { }
-
   ngOnInit(): void {
     if (this.loginService.checkUser()) {
       this.router.navigate(['/']);
     }
+    this.nav.hide();
   }
 
 }
