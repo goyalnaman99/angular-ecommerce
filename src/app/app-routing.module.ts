@@ -32,6 +32,10 @@ const routes: Routes = [
     component: UploadComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: '**',
+    component: LoginComponent,
+  },
 ];
 
 @NgModule({

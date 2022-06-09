@@ -19,7 +19,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('[data-toggle="tooltip"]').tooltip();
+    setTimeout(() => {
+      console.log($('[data-toggle="tooltip"]'));
+      $('[data-toggle="tooltip"]').tooltip();
+    }, 10000);
   }
 
 }
