@@ -5,16 +5,19 @@ import { NavFootService } from 'src/app/services/nav-foot.service';
 import 'jquery';
 declare var $: any;
 
+interface filters {
+  brand: string[];
+  category: string[];
+}
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
+
 export class ProductsComponent implements OnInit {
-  filters = {
-    brand: [],
-    category: []
-  }
+  filters: filters;
   products = this.productService.getProducts();
   filteredProducts = this.products;
   noOfResults: number;
@@ -36,7 +39,7 @@ export class ProductsComponent implements OnInit {
       let index = this.filters[filterType].indexOf(filterValue);
       this.filters[filterType].splice(index, 1);
     }
-    // sessionStorage.setItem('filters', JSON.stringify(this.filters));
+    sessionStorage.setItem('filters', JSON.stringify(this.filters));
     this.filterProducts(this.filters);
   }
 
@@ -98,24 +101,14 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.filters = JSON.parse(sessionStorage.getItem('filters')!)
-    // if (!this.filters) {
-    //   this.filters = {
-    //     brand: [],
-    //     category: []
-    //   }
-    // }
-    // else {
-    //   console.log(this.filters);
-    //   for (let key of this.filters['brand']) {
-    //     console.log($('#Roadster'));
-    //     $("#" + key).prop('checked', true);
-    //   }
-    //   for (let key of this.filters['category']) {
-    //     $("#" + key).prop('checked', true);
-    //   }
-    // }
-    // console.log(this.filters);
+    this.filters = JSON.parse(sessionStorage.getItem('filters')!)
+    if (!this.filters) {
+      this.filters = {
+        brand: [],
+        category: []
+      }
+    }
+    this.filterProducts(this.filters);
     $(document).ready(() => {
       $('[data-toggle="tooltip"]').tooltip()
     })

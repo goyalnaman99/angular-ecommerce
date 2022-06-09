@@ -44,7 +44,7 @@
                     <div class="form-check show" id="brand-filter" *ngFor="let brand of brands">
                         <input class="form-check-input"
                             (change)="populateFilters(brand, 'brand', $any($event.target).checked)" type="checkbox"
-                            id="{{brand}}">
+                            id="{{brand}}" [checked]="filters['brand'].includes(brand)">
                         <label class="form-check-label" for="{{brand}}">
                             {{brand}}
                         </label>
@@ -62,7 +62,7 @@
                     <div class="form-check show" id="category-filter" *ngFor="let category of categories">
                         <input class="form-check-input"
                             (change)="populateFilters(category, 'category' , $any($event.target).checked)"
-                            type="checkbox" id="{{category}}">
+                            type="checkbox" id="{{category}}" [checked]="filters['category'].includes(category)">
                         <label class="form-check-label" for="{{category}}">
                             {{category}}
                         </label>

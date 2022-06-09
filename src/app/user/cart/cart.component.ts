@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Papa } from 'ngx-papaparse';
 import { NavFootService } from 'src/app/services/nav-foot.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +20,7 @@ export class CartComponent implements OnInit {
   modalBody = "";
   currProductId: number;
 
-  constructor(public productService: ProductService, public cartService: CartService, private papa: Papa, public nav: NavFootService) { }
+  constructor(public productService: ProductService, public cartService: CartService, private papa: Papa, public nav: NavFootService, private loginService: LoginService) { }
 
   increaseQuantity(productId: any) {
     this.cartService.increaseQuantity(productId);
@@ -45,6 +46,7 @@ export class CartComponent implements OnInit {
   }
 
   downloadOrderCSV() {
+    this.loginService.checkUser();
     let rows: any[] = [];
     for (let key in this.cartItems) {
       const product = this.productService.getProduct(key);

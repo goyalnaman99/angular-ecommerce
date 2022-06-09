@@ -7,6 +7,8 @@ import { LoginService } from './login.service';
 })
 export class CartService {
 
+  constructor(private productService: ProductService, private loginService: LoginService) { }
+
   //this is the cart map of all users, map of userId and their cartItems
   getCartMap() {
     try {
@@ -26,22 +28,22 @@ export class CartService {
       const cartMap = this.getCartMap();
       const userId = this.loginService.getUserId();
       if (userId) {
-        let cartItems = cartMap.hasOwnProperty(userId) ? cartMap[userId] : {};
+        let cartItems = cartMap[userId] || {};
         for (let key in cartItems) {
           if (!this.productService.getProduct(key)) {
-            console.log("error in product id");
+            // console.log("error in product id");
             delete cartItems[key];
             this.setCartMap(cartItems);
           }
           if (!isNaN(cartItems[key])) {
             if (cartItems[key] < 0) {
-              console.log("quantity not positive");
+              // console.log("quantity not positive");
               delete cartItems[key];
               this.setCartMap(cartItems);
             }
           }
           else {
-            console.log("quantity not number");
+            // console.log("quantity not number");
             delete cartItems[key];
             this.setCartMap(cartItems);
           }
@@ -89,7 +91,7 @@ export class CartService {
   }
 
   deletefromCart(productId) {
-    console.log("in delete");
+    this.loginService.checkUser();
     let cartItems = this.getCartItems();
     if (cartItems != null) {
       console.log(cartItems[productId]);
@@ -102,10 +104,12 @@ export class CartService {
   }
 
   clearCart() {
+    this.loginService.checkUser();
     this.setCartMap({});
   }
 
   increaseQuantity(productId) {
+    this.loginService.checkUser();
     console.log(productId);
     let quantity = this.getProductQuantity(productId);
     console.log(quantity);
@@ -114,6 +118,7 @@ export class CartService {
   }
 
   decreaseQuantity(productId) {
+    this.loginService.checkUser();
     let quantity = this.getProductQuantity(productId);
 
     if (quantity > 1) {
@@ -126,6 +131,7 @@ export class CartService {
   }
 
   addToCart(productId, qty) {
+    this.loginService.checkUser();
     const cartItems = this.getCartItems();
     console.log(cartItems);
     //adding to cart item if product exists in cart
@@ -133,5 +139,4 @@ export class CartService {
     this.setCartMap(cartItems);
 
   }
-  constructor(private productService: ProductService, private loginService: LoginService) { }
 }
