@@ -8,9 +8,9 @@ import { NavFootService } from 'src/app/services/nav-foot.service';
 })
 export class FooterComponent implements OnInit {
   constructor(public nav: NavFootService) { }
-  today = new Date().toLocaleString("en-IN");
+  today: string;
 
   ngOnInit(): void {
-    setInterval(() => { this.today }, 1000) //TODO fix timer
+    setInterval(() => { this.today = new Date().toLocaleString("en-IN"); }, 1000)
   }
 }
