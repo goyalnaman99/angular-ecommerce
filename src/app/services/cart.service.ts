@@ -34,18 +34,22 @@ export class CartService {
             // console.log("error in product id");
             delete cartItems[key];
             this.setCartMap(cartItems);
+            location.reload();
+
           }
           if (!isNaN(cartItems[key])) {
             if (cartItems[key] <= 0) {
               // console.log("quantity not positive");
               delete cartItems[key];
               this.setCartMap(cartItems);
+              location.reload();
             }
           }
           else {
             // console.log("quantity not number");
             delete cartItems[key];
             this.setCartMap(cartItems);
+            location.reload();
           }
         }
         return cartItems;

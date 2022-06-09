@@ -28,11 +28,8 @@
                 <div class="dropdown-item text-center">
                     <span>Hi, {{this.loginService.getUserName()}}</span>
                 </div>
-                <a class="nav-link dropdown-item cursor text-center" (click)="logout()">
-                    <i class="material-icons" id="logout" data-toggle="tooltip" title="Logout">
-                        logout
-                    </i>
-                </a>
+                <a class="nav-link dropdown-item cursor text-center" (click)="logout()"><i class="material-icons">
+                        logout </i><span class="align-top ml-1">Logout</span></a>
             </div>
         </li>
     </ul>

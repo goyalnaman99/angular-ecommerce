@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavFootService } from 'src/app/services/nav-foot.service';

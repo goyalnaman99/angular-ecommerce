@@ -37,6 +37,7 @@ export class UploadComponent implements OnInit {
     }
     if (this.file) {
       this.papa.parse(this.file, config)
+      this.file = null;
     }
   }
 
