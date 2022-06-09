@@ -29,8 +29,7 @@ export class ProductsComponent implements OnInit {
   modalBody = "";
   currProductId: number;
 
-  constructor(private productService: ProductService, public cartService: CartService, public nav: NavFootService) {
-  }
+  constructor(private productService: ProductService, public cartService: CartService, public nav: NavFootService) { }
 
   populateFilters(filterValue: string, filterType: string, isChecked: boolean) {
     if (isChecked) {

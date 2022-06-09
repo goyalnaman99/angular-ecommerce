@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
   }
 
   downloadOrderCSV() {
-    this.loginService.checkUser();
+    if (!this.loginService.checkUser()) this.loginService.logout();
     let rows: any[] = [];
     for (let key in this.cartItems) {
       const product = this.productService.getProduct(key);

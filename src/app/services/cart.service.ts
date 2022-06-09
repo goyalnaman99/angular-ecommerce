@@ -36,7 +36,7 @@ export class CartService {
             this.setCartMap(cartItems);
           }
           if (!isNaN(cartItems[key])) {
-            if (cartItems[key] < 0) {
+            if (cartItems[key] <= 0) {
               // console.log("quantity not positive");
               delete cartItems[key];
               this.setCartMap(cartItems);
@@ -91,7 +91,7 @@ export class CartService {
   }
 
   deletefromCart(productId) {
-    this.loginService.checkUser();
+    if (!this.loginService.checkUser()) this.loginService.logout();
     let cartItems = this.getCartItems();
     if (cartItems != null) {
       console.log(cartItems[productId]);
@@ -104,12 +104,12 @@ export class CartService {
   }
 
   clearCart() {
-    this.loginService.checkUser();
+    if (!this.loginService.checkUser()) this.loginService.logout();
     this.setCartMap({});
   }
 
   increaseQuantity(productId) {
-    this.loginService.checkUser();
+    if (!this.loginService.checkUser()) this.loginService.logout();
     console.log(productId);
     let quantity = this.getProductQuantity(productId);
     console.log(quantity);
@@ -118,7 +118,7 @@ export class CartService {
   }
 
   decreaseQuantity(productId) {
-    this.loginService.checkUser();
+    if (!this.loginService.checkUser()) this.loginService.logout();
     let quantity = this.getProductQuantity(productId);
 
     if (quantity > 1) {
@@ -131,7 +131,7 @@ export class CartService {
   }
 
   addToCart(productId, qty) {
-    this.loginService.checkUser();
+    if (!this.loginService.checkUser()) this.loginService.logout();
     const cartItems = this.getCartItems();
     console.log(cartItems);
     //adding to cart item if product exists in cart
