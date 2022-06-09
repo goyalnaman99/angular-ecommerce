@@ -8,11 +8,11 @@ import users from 'src/assets/json/login.json';
 export class LoginService {
 
   login(email: string, password: string) {
-    const user = users.filter(
+    const user = users.find(
       (users) => email === users.email && password === users.password
     );
-    if (user.length) {
-      localStorage.setItem("user", JSON.stringify(user[0].id));
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user.id));
       this.router.navigate(['/']);
       return true;
     }
