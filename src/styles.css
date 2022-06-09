@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+.cursor {
+    cursor: pointer;
+}
+
+input {
+    text-align: center !important;
+}
+
+.text-danger {
+    color: #a90d0dfa !important;
+}
+
+.btn-outline-danger {
+    color: #a90d0dfa;
+    border-color: #a90d0dfa;
+}

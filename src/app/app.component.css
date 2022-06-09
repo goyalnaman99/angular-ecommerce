@@ -1,35 +1,18 @@
 body {
-  min-height: 100vh;
-  margin: 0;
-  position: relative;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
 }
 
 body::after {
-  content: "";
-  display: block;
-  height: 30px;
+    content: "";
+    display: block;
+    height: 30px;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-}
-
-.cursor {
-  cursor: pointer;
-}
-
-input {
-  text-align: center !important;
-}
-
-.text-danger {
-  color: #a90d0dfa !important;
-}
-
-.btn-outline-danger {
-  color: #a90d0dfa;
-  border-color: #a90d0dfa;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }
