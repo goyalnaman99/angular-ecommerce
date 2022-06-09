@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Papa } from 'ngx-papaparse';
 import { NavFootService } from 'src/app/services/nav-foot.service';
 import { LoginService } from 'src/app/services/login.service';
+declare var $: any;
 
 @Component({
   selector: 'app-cart',
@@ -122,6 +123,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $('[data-toggle="tooltip"]').tooltip();
     this.nav.show();
   }
 

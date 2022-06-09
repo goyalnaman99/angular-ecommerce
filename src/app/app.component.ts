@@ -10,8 +10,5 @@ declare var $: any;
 export class AppComponent {
   title = 'angular-ecommerce';
   ngOnInit() {
-    $(document).ready(() => {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
   }
 }

@@ -19,9 +19,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $(document).ready(() => {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
+    $('[data-toggle="tooltip"]').tooltip();
   }
 
 }
