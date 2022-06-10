@@ -94,9 +94,7 @@ export class CartComponent implements OnInit {
     document.body.removeChild(a);
 
     //clearing cart
-    this.cartService.clearCart();
-
-    this.openSuccessModal();
+    this.clearCart();
   }
 
   openSuccessModal() {
@@ -126,5 +124,4 @@ export class CartComponent implements OnInit {
     });
     this.nav.show();
   }
-
 }
