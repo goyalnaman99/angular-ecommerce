@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NavFootService } from 'src/app/services/nav-foot.service';
+declare var $: any;
 
 @Component({
   selector: 'app-product-details',
@@ -12,7 +13,6 @@ import { NavFootService } from 'src/app/services/nav-foot.service';
 export class ProductDetailsComponent implements OnInit {
   productId: number = 0;
   product: any = null;
-  displayStyle = "none";
   modalTitle = "";
   modalBody = "";
   currProductId: number;
@@ -35,13 +35,13 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   openPopup(modalTitle: string, modalBody: string, productId?: any) {
-    this.displayStyle = "block";
+    $('#confirm-modal').modal('show');
     this.modalTitle = modalTitle;
     this.currProductId = productId;
     this.modalBody = modalBody;
   }
   closePopup() {
-    this.displayStyle = "none";
+    $('#confirm-modal').modal('hide');
   }
 
   decreaseQuantity(productId: any) {

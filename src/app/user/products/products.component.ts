@@ -24,7 +24,6 @@ export class ProductsComponent implements OnInit {
   cartItems = this.cartService.getCartItems();
   brands = [...new Set(this.products.map((item) => item.brand))];
   categories = [...new Set(this.products.map((item) => item.category))];
-  displayStyle = "none";
   modalTitle = "";
   modalBody = "";
   currProductId: number;
@@ -85,18 +84,14 @@ export class ProductsComponent implements OnInit {
 
   deleteProduct(productId: number) {
     this.cartService.deletefromCart(productId);
-    this.closePopup();
-    location.reload();
+    $('#confirm-modal').modal('hide');
   }
 
   openPopup(modalTitle: string, modalBody: string, productId?: any) {
-    this.displayStyle = "block";
+    $('#confirm-modal').modal('show');
     this.modalTitle = modalTitle;
     this.currProductId = productId;
     this.modalBody = modalBody;
-  }
-  closePopup() {
-    this.displayStyle = "none";
   }
 
   ngOnInit(): void {

@@ -15,8 +15,6 @@ export class CartComponent implements OnInit {
   totalPrice: number;
   cartItems = this.cartService.getCartItems();
   products = this.productService.getProducts();
-  displayStyle = "none";
-  displaySuccessModal = "none";
   modalTitle = "";
   modalBody = "";
   currProductId: number;
@@ -102,7 +100,7 @@ export class CartComponent implements OnInit {
   }
 
   openSuccessModal() {
-    this.displaySuccessModal = "block";
+    $('#order-success-modal').modal('show');
   }
 
   deleteProduct(productId: number) {
@@ -112,14 +110,14 @@ export class CartComponent implements OnInit {
   }
 
   openPopup(modalTitle: string, modalBody: string, productId?: any) {
-    this.displayStyle = "block";
+    $('#confirm-modal').modal('show');
     this.modalTitle = modalTitle;
     this.currProductId = productId;
     this.modalBody = modalBody;
   }
 
   closePopup() {
-    this.displayStyle = "none";
+    $('#confirm-modal').modal('hide');
   }
 
   ngOnInit(): void {
