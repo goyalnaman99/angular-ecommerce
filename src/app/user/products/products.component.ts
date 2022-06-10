@@ -108,7 +108,9 @@ export class ProductsComponent implements OnInit {
       }
     }
     this.filterProducts(this.filters);
-    $('[data-toggle="tooltip"]').tooltip();
+    setTimeout(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
     this.noOfResults = this.filteredProducts.length;
     this.nav.show();
   }

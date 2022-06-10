@@ -123,7 +123,9 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('[data-toggle="tooltip"]').tooltip();
+    setTimeout(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
     this.nav.show();
   }
 
